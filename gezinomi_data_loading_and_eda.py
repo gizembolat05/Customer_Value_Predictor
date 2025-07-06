@@ -25,3 +25,12 @@ bins=[-1,7,30,90,df["SaleCheckInDayDiff"].max()]
 labels=["Minuters","Potential Planners","Planners","Early Bookers"]
 df["EB_Score"] = pd.cut(df["SaleCheckInDayDiff"], bins=bins, labels=labels)
 df.head()
+
+df.groupby(["SaleCityName","ConceptName","EB_Score"]).agg({"Price":["mean","count"]}).reset_index()
+
+df.groupby(["SaleCityName","ConceptName","Seasons"]).agg({"Price":["mean","count"]}).reset_index()
+
+df.groupby(["SaleCityName","ConceptName","CInDay"]).agg({"Price":["mean","count"]}).reset_index()
+
+agg_df=df.groupby(["SaleCityName","ConceptName","Seasons"]).agg({"Price":"mean"}).sort_values("Price",ascending=False)
+agg_df.head(20)
