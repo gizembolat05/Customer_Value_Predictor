@@ -40,3 +40,14 @@ agg_df.head(20)
 
 agg_df["sales_level_based"] = agg_df[["SaleCityName","ConceptName","Seasons"]].apply(lambda x: "_".join(x).upper(),axis=1)
 agg_df.head(20)
+df.head()
+
+agg_df["SEGMENT"] = pd.qcut(agg_df["Price"],4,labels=["D","C","B","L"])
+agg_df.groupby("SEGMENT").agg({"Price":["mean","max","sum"]})
+
+agg_df.sort_values(by="Price")
+
+agg_df[agg_df["sales_level_based"]=="ANTALYA_HERŞEY DAHIL_HIGH"]
+agg_df[agg_df["sales_level_based"]=="GIRNE_YARIM PANSIYON_LOW"]
+agg_df[agg_df["sales_level_based"]=="İZMIR_HERŞEY DAHIL_LOW"]
+agg_df[agg_df["sales_level_based"]=="MUĞLA_HERŞEY DAHIL_HIGH"]
